@@ -14,4 +14,10 @@ Rails.application.routes.draw do
 
   # Inventory
   match '/inventory', :to => "inventory#index", via: :get
+
+  # Items
+  match '/items', :to => "inventory#index", via: :get
+
+  # Locations
+  match '/locations', :to => "inventory#index", via: :get
 end
