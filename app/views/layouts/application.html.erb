@@ -15,23 +15,36 @@
     <div id="wrapper">
       <!-- Sidebar -->
       <div id="sidebar-wrapper">
-        <ul class="sidebar-nav">
+        <ul class="sidebar-nav top">
           <li class="sidebar-brand">
             <%= link_to "DEV", root_path %>
           </li>
           <li><%= link_to "Inventory", inventory_path %></li>
           <li><%= link_to "Items", items_path %></li>
           <li><%= link_to "Locations", locations_path %></li>
+        </ul>
+        <ul class="sidebar-nav bottom">
+          <li><%= link_to "My account", "" %></li>
           <li><%= link_to "Logout", logout_path %></li>
         </ul>
       </div>
       <!-- /#sidebar-wrapper -->
-
       <!-- Page Content -->
       <div id="page-content-wrapper">
         <div class="container-fluid">
           <div class="row">
             <div class="col-lg-12">
+              <!-- nav-top, if width < 768px -->
+              <div id="navigation-top">
+                <ol class="breadcrumb">
+                  <li><%= link_to "Inventory", inventory_path %></li>
+                  <li><%= link_to "Items", items_path %></li>
+                  <li><%= link_to "Locations", locations_path %></li>
+                  <li><%= link_to "My account", "" %></li>
+                  <li><%= link_to "Logout", logout_path %></li>
+                </ol>
+              </div>
+              <!-- /nav-top -->
               <!-- flash messages -->
               <div id="flash-wrapper">
                 <% if flash[:error] %>
@@ -59,7 +72,7 @@
                   </div>
                 <% end %>
               </div>
-              <!-- END Flash messages -->
+              <!-- /Flash messages -->
             </div>
             <div class="col-lg-12">
               <%= yield %>
@@ -70,13 +83,5 @@
       <!-- /#page-content-wrapper -->
     </div>
     <!-- /#wrapper -->
-
-    <!-- Menu Toggle Script -->
-    <script>
-      $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-      });
-    </script>
   </body>
 </html>
