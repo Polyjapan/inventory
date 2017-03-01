@@ -1,0 +1,54 @@
+<h1>
+  Items
+  <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addItemModal">
+    Add Item &raquo;
+  </button>
+</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th style="width:5%;">#</th>
+      <th style="width:25%;">Name</th>
+      <th style="width:55;%">Description</th>
+      <th style="width:5%;">Stock</th>
+      <th style="width:10%;">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @items.each do |i| %>
+      <tr>
+       <td><%= i.id %></td>
+       <td><%= i.name %></td>
+       <td><%= i.description %></td>
+       <td><%= link_to "Stock &raquo;".html_safe, item_path(:id => i.id) %></td>
+       <td>
+         <%= link_to "Edit", edit_item_path(:id => i.id) %> /
+         <%= link_to "Delete", item_path(:id => i.id), method: :delete, data: { confirm: 'Delete ?' } %>
+       </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<!-- Add item modal -->
+<div class="modal fade" id="addItemModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Add an item</h4>
+      </div>
+      <%= form_for Item.new do |f| %>
+        <div class="modal-body">
+          <%= f.text_field :name, placeholder: "Name", class: "form-control form-spacer" %>
+          <%= f.text_area :description, placeholder: "Description", class: "form-control form-spacer" %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <%= f.submit "Save Item", class: "btn btn-primary" %>
+        </div>
+      <%end %>
+    </div>
+  </div>
+</div>

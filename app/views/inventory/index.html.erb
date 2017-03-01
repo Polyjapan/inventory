@@ -1,1 +1,104 @@
-Hello world !
+<h1>
+  Inventory
+  <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#newEntryModal">
+    New Entry &raquo;
+  </button>
+  <button class="btn btn-default btn-sm" type="button" data-toggle="collapse" data-target="#advancedSearch" aria-expanded="false" aria-controls="advancedSearch">
+    Advanced Search
+</button>
+</h1>
+
+<%= search_form_for @q, url: inventory_path do |f| %>
+  <div class="row">
+    <div class="col-md-5">
+      <%= f.search_field :item_name_cont, class: "form-control", placeholder: "Item name contains", id: "item_name_search", autocomplete: "off" %>
+    </div>
+    <div class="col-md-5">
+      <%= f.search_field :location_name_cont, class: "form-control", placeholder: "Location name contains", id: "location_name_search", autocomplete: "off" %>
+    </div>
+    <div class="col-md-2">
+      <%= f.submit "Search !", class: "btn btn-block btn-primary" %>
+    </div>
+  </div>
+
+  <br />
+  <div class="collapse" id="advancedSearch">
+    <div class="well">
+      <span class="label label-default">Not yet implemented.</span>
+    </div>
+  </div>
+<% end %>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th style="width:5%;">#</th>
+      <th style="width:20%;">Item</th>
+      <th style="width:35%;">Note</th>
+      <th style="width:10%;">Location</th>
+      <th style="width:5%;">Expiration</th>
+      <th style="width:10%;">Quantity</th>
+      <th style="Width:15%;">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @lines.each do |i| %>
+      <tr>
+        <td><%= i.id %></td>
+        <td><%= i.item.name %></td>
+        <td><%= i.note %></td>
+        <td><%= i.location.name %></td>
+        <td>
+          <% if !i.expire_on.nil? %>
+            <span class="label label-default">
+              <%= i.expire_on.strftime("Expire on %d-%m-%y") %>
+            </span>
+          <% end %>
+        </td>
+        <td><%= i.quantity %></td>
+        <td>
+          <%= link_to "Edit", "/inventory/#{i.id}/edit" %> /
+          <%= link_to "Delete", inventory_path(:id => i.id), method: :delete, data: { confirm: 'Delete ?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<!-- New entry modal -->
+<div class="modal fade" id="newEntryModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Add an item</h4>
+      </div>
+      <%= form_for [Line.new], url: {action: "create"} do |f| %>
+        <div class="modal-body">
+          <div class="form-group" id="item-field-group">
+            <%= text_field_tag "item", "", name: "item_name", id: "item-field", class: "form-control", placeholder: "Item", data_provide: "typehead", autocomplete: "off" %>
+            <%= f.hidden_field :item_id, value: 0, id: "item-field-id" %>
+          </div>
+           <div class="form-group" id="loc-field-group">
+            <%= text_field_tag "loc", "",  name: "location_name", id: "loc-field", class: "form-control", placeholder: "Location", data_provide: "typehead", autocomplete: "off" %>
+            <%= f.hidden_field :location_id, value: 0, id: "loc-field-id" %>
+          </div>
+          <%= f.text_field :expire_on, placeholder: "Expiration (Optional)", class: "form-control form-spacer datepicker" %>
+          <%= f.text_field :quantity, placeholder: "Quantity", class: "form-control form-spacer" %>
+          <%= f.text_area :note, placeholder: "Note", class: "form-control" %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <%= f.submit "Save Item", class: "btn btn-primary" %>
+        </div>
+      <%end %>
+    </div>
+  </div>
+</div>
+
+<%= render "autocomplete" %>
+<script>
+$('.datepicker').datepicker({
+      format: 'dd-mm-yyyy'
+})
+</script>

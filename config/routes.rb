@@ -14,10 +14,17 @@ Rails.application.routes.draw do
 
   # Inventory
   match '/inventory', :to => "inventory#index", via: :get
+  match '/inventory', :to => "inventory#destroy", via: :delete
+  match '/inventory/create', :to => "inventory#create", via: :post
+  match '/inventory/:id/edit', :to => "inventory#edit", via: :get
+  match '/inventory/:id', :to => "inventory#update", via: :patch
 
   # Items
-  match '/items', :to => "inventory#index", via: :get
+  #match '/items', :to => "items#index", via: :get
+  resources :items, :only => [:index, :create, :update, :destroy, :edit, :show]
 
   # Locations
-  match '/locations', :to => "inventory#index", via: :get
+  #match '/locations', :to => "locations#index", via: :get
+  resources :locations, :only => [:index, :create, :update, :destroy, :edit, :show]
+
 end

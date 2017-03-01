@@ -1,0 +1,30 @@
+<%= form_for @line, url: {action: "update"} do |f| %>
+  <h1>Edit inventory entry <%= f.submit "Save changes &raquo;".html_safe, class: "btn btn-primary" %></h1>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group" id="item-field-group">
+        <%= text_field_tag "item", @line.item.name,  id: "item-field", class: "form-control", placeholder: "Item", data_provide: "typehead", autocomplete: "off" %>
+        <%= f.hidden_field :item_id, id: "item-field-id" %>
+      </div>
+      <%= f.text_field :quantity, placeholder: "Quantity", class: "form-control form-spacer" %>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group" id="loc-field-group">
+        <%= text_field_tag "loc", @line.location.name,  id: "loc-field", class: "form-control", placeholder: "Location", data_provide: "typehead", autocomplete: "off" %>
+        <%= f.hidden_field :location_id, id: "loc-field-id" %>
+      </div>
+        <%= f.datetime_field :expire_on, placeholder: "Expiration (Optional)", class: "form-control form-spacer datepicker" %>
+    </div>
+    <div class="col-md-12">
+      <%= f.text_area :note, placeholder: "Note", class: "form-control" %>
+    </div>
+  </div>
+<% end %>
+
+<%= render "autocomplete" %>
+<script>
+$('.datepicker').datepicker({
+      format: 'dd-mm-yyyy'
+})
+</script>

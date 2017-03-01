@@ -1,0 +1,72 @@
+<!-- autocomplete -->
+<script>
+var $item = $('#item-field');
+var $item_id = $('#item-field-id');
+var $item_group = $('#item-field-group')
+
+var $loc = $('#loc-field');
+var $loc_id = $('#loc-field-id');
+var $loc_group = $('#loc-field-group')
+
+function success(id, group, current) {
+  group.removeClass('has-warning');
+  group.addClass('has-success');
+  id.val(current.id);
+}
+
+function fail(id, group) {
+  id.val(0);
+  group.removeClass('has-success');
+  group.addClass('has-warning');
+}
+
+$.get('/modules/logistics/items.json', function(data){
+  $item.typeahead({ source:data });
+},'json');
+$item.change(function() {
+  var current = $item.typeahead("getActive");
+  if (current) {
+    if (current.name == $item.val()) {
+      // This means the exact match is found. Use toLowerCase() if you want case insensitive match.
+      success($item_id, $item_group, current);
+    } else {
+      // This means it is only a partial match, you can either add a new item
+      // or take the active if you don't want new items
+      fail($item_id, $item_group);
+    }
+  } else {
+    // Nothing is active so it is a new value (or maybe empty value)
+    fail($item_id, $item_group);
+  }
+});
+
+$.get('/modules/logistics/locations.json', function(data){
+  $loc.typeahead({ source:data });
+},'json');
+$loc.change(function() {
+  var current = $loc.typeahead("getActive");
+  if (current) {
+    if (current.name == $loc.val()) {
+      // This means the exact match is found. Use toLowerCase() if you want case insensitive match.
+      success($loc_id, $loc_group, current);
+    } else {
+      // This means it is only a partial match, you can either add a new loc
+      // or take the active if you don't want new locs
+      fail($loc_id, $loc_group);
+    }
+  } else {
+    // Nothing is active so it is a new value (or maybe empty value)
+    fail($loc_id, $loc_group);
+  }
+});
+
+// Requesting json sources twice !
+$.get('/modules/logistics/items.json', function(data){
+  $("#item_name_search").typeahead({ source:data });
+},'json');
+
+$.get('/modules/logistics/locations.json', function(data){
+  $("#location_name_search").typeahead({ source:data });
+},'json');
+</script>
+<!-- /autocomplete -->

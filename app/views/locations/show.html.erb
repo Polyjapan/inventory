@@ -1,0 +1,32 @@
+<h1>Storage : <%= @location.name %> <%= link_to "Back &crarr;".html_safe, locations_path, class: "btn btn-primary" %></h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th style="width:5%;">Inventory ID</th>
+      <th style="width:15%;">Location</th>
+      <th style="width:60%;">Note</th>
+      <th style="width:10%;">Expiration</th>
+      <th style="width:10%;">Quantity</th>
+      <th style="widtch:10%;">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @lines.each do |l| %>
+      <tr>
+        <td>#<%= l.id %></td>
+        <td><%= l.location.name %></td>
+        <td><%= l.note %></td>
+        <td>
+          <% if !l.expire_on.nil? %>
+            <span class="label label-default">
+              <%= l.expire_on.strftime("Expire on %d-%m-%y") %>
+            </span>
+          <% end %>
+        </td>
+        <td><%= l.quantity %></td>
+        <td><%= link_to "Edit", "/inventory/#{l.id}/edit" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
