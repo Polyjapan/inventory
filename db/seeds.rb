@@ -6,6 +6,6 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 print "Creating default user..."
-User.create!(:email => "admin@domain.tld", :password => "vlurps")
+User.create!(:email => "admin@domain.tld", :password => "vlurps", :admin => true)
 puts "OK"
 puts "Default user: admin@domain.tld; Password: vlurps"
