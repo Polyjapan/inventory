@@ -14,7 +14,12 @@
     <% @users.each do |u| %>
       <tr>
         <td><%= u.id %></td>
-        <td><%= u.email %></td>
+        <td>
+          <%= u.email %>
+          <% if u.admin %>
+            <span class="label label-danger">Admin</span>
+          <% end %>
+        </td>
         <td><%= u.created_at %></td>
         <td><%= u.last_sign_in_at %></td>
         <td>

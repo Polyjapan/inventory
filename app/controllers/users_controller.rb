@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
+  before_action :authenticate_admin!
 
   def index
     @users = User.all
@@ -39,6 +40,14 @@ class UsersController < ApplicationController
   end
 
   private
+
+  def authenticate_admin!
+    if current_user.try(:admin?)
+      true
+    else
+      redirect_to root_path
+    end
+  end
 
   def user_params
     params.require(:user).permit(:email, :password, :password_confirmation)
