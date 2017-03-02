@@ -34,10 +34,11 @@ before_action :authenticate_user!
   end
 
   def destroy
-    if Line.destroy params[:id]
+    @line = Line.destroy params[:id]
+    if @line
       flash[:notice] = "Destroyed."
     else
-      flash[:error] = "Something went wrong."
+      flash[:error] = "Something went wrong :" + @line.errors.full_messages.to_sentence
     end
     redirect_to inventory_path
   end

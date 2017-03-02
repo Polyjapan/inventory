@@ -23,7 +23,7 @@ class ItemsController < ApplicationController
     if @item.save
       flash[:success] = "Successfuly saved."
     else
-      flash[:error] = "Something went wrong."
+      flash[:error] = "Something went wrong : " + @item.errors.full_messages.to_sentence
     end
     redirect_to items_path
   end
@@ -33,7 +33,7 @@ class ItemsController < ApplicationController
     if @item.update(item_params)
       flash[:success] = "Successfuly saved."
     else
-      flash[:error] = "Something went wrong."
+      flash[:error] = "Something went wrong : " + @item.errors.full_messages.to_sentence
     end
     redirect_to items_path
   end
@@ -46,7 +46,7 @@ class ItemsController < ApplicationController
       if @item.destroy
         flash[:notice] = "Deleted!"
       else
-        flash[:error] = "Something went wrong."
+        flash[:error] = "Something went wrong : " + @item.errors.full_messages.to_sentence
       end
     end
     redirect_to items_path

@@ -20,7 +20,11 @@ class LocationsController < ApplicationController
 
   def create
     @location = Location.new(location_params)
-    @location.save
+    if @location.save
+      flash[:success] = "Successfuly saved."
+    else
+      flash[:error] = "Something went wrong : " + @location.errors.full_messages.to_sentence
+    end
     redirect_to locations_path
   end
 
@@ -29,7 +33,7 @@ class LocationsController < ApplicationController
     if @location.update(location_params)
       flash[:success] = "Successfuly saved."
     else
-      flash[:error] = "Something went wrong."
+      flash[:error] = "Something went wrong : " + @location.errors.full_messages.to_sentence
     end
     redirect_to locations_path
   end
@@ -42,7 +46,7 @@ class LocationsController < ApplicationController
       if @location.destroy
         flash[:notice] = "Deleted!"
       else
-        flash[:error] = "Something went wrong."
+        flash[:error] = "Something went wrong : " + @location.errors.full_messages.to_sentence
       end
     end
     redirect_to locations_path
