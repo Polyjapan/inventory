@@ -36,7 +36,7 @@ class LocationsController < ApplicationController
 
   def destroy
     @location = Location.find(params[:id])
-    if !@location.lines.nil?
+    if @location.lines.count != 0
       flash[:error] = "Cannot delete location : exists in inventory."
     else
       if @location.destroy

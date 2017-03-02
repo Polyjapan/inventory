@@ -40,7 +40,7 @@ class ItemsController < ApplicationController
 
   def destroy
     @item = Item.find(params[:id])
-    if !@item.lines.nil?
+    if @item.lines.count != 0
       flash[:error] = "Cannot delete item : exists in inventory."
     else
       if @item.destroy

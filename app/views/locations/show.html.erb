@@ -4,7 +4,7 @@
   <thead>
     <tr>
       <th style="width:5%;">Inventory ID</th>
-      <th style="width:15%;">Location</th>
+      <th style="width:15%;">Item</th>
       <th style="width:60%;">Note</th>
       <th style="width:10%;">Expiration</th>
       <th style="width:10%;">Quantity</th>
@@ -15,7 +15,7 @@
     <% @lines.each do |l| %>
       <tr>
         <td>#<%= l.id %></td>
-        <td><%= l.location.name %></td>
+        <td><%= l.item.name %></td>
         <td><%= l.note %></td>
         <td>
           <% if !l.expire_on.nil? %>
