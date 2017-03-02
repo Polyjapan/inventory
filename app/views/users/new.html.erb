@@ -2,6 +2,8 @@
 
 <%= form_for User.new do |f| %>
 
+  <%= f.email_field :email, placeholder: "Email", class: "form-control form-spacer" %>
+
   <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
     <div class="panel panel-default">
       <div class="panel-heading" role="tab" id="headingOne">
@@ -14,9 +16,6 @@
       <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
         <div class="panel-body">
           <div class="row">
-            <div class="col-md-6">
-              <%= f.email_field :email, placeholder: "Email", class: "form-control form-spacer" %>
-            </div>
             <div class="col-md-6">
               <%= f.submit "Send &raquo;".html_safe, class: "btn btn-primary btn-block", value: "generate" %>
             </div>
@@ -40,9 +39,6 @@
             </div>
             <div class="col-md-6">
               <%= f.password_field :password_confirmation, placeholder: "Password confirmation", class: "form-control form-spacer" %>
-            </div>
-            <div class="col-md-6">
-              <%= f.email_field :email, placeholder: "Email", class: "form-control form-spacer" %>
             </div>
             <div class="col-md-6">
               <%= f.submit "Save &raquo;".html_safe, class: "btn btn-warning btn-block", value: "enforce" %>

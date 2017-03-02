@@ -18,6 +18,7 @@ class UsersController < ApplicationController
     if params[:commit] == "generate"
       generated_password = Devise.friendly_token.first(8)
       @user.password = generated_password
+      @user.password_confirmation = generated_password
     end
     if @user.save
       flash[:success] = "Successfuly saved."
