@@ -1,16 +1,20 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   # Authentification system (devise gem)
-  devise_for :users
+  devise_for :users, :skip => [:registrations]
   devise_scope :user do
     match "/login", :to => "devise/sessions#new", via: :get
     match "/logout", :to => "devise/sessions#destroy", via: :get
     match "/signup", :to => "devise/registrations#new", via: :get
     match "/me", :to => "devise/registrations#edit", via: :get
+    put 'users' => 'devise/registrations#update', :as => 'user_registration'
   end
 
   # '/'
   root 'home#root'
+
+  # User management
+  resources :users, :only => [:index, :edit, :update, :new, :create, :destroy]
 
   # Inventory
   match '/inventory', :to => "inventory#index", via: :get
@@ -26,5 +30,4 @@ Rails.application.routes.draw do
   # Locations
   #match '/locations', :to => "locations#index", via: :get
   resources :locations, :only => [:index, :create, :update, :destroy, :edit, :show]
-
 end

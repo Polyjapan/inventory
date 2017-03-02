@@ -1,0 +1,55 @@
+<h1>New User <%= link_to "Back &crarr;".html_safe, users_path, class: "btn btn-primary" %></h1>
+
+<%= form_for User.new do |f| %>
+
+  <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <div class="panel panel-default">
+      <div class="panel-heading" role="tab" id="headingOne">
+        <h4 class="panel-title">
+          <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            Generate a random password and send it to the user
+          </a>
+        </h4>
+      </div>
+      <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-6">
+              <%= f.email_field :email, placeholder: "Email", class: "form-control form-spacer" %>
+            </div>
+            <div class="col-md-6">
+              <%= f.submit "Send &raquo;".html_safe, class: "btn btn-primary btn-block", value: "generate" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading" role="tab" id="headingTwo">
+        <h4 class="panel-title">
+          <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            Enforce password, do not notify the user
+          </a>
+        </h4>
+      </div>
+      <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-6">
+              <%= f.password_field :password, placeholder: "Password", class: "form-control form-spacer" %>
+            </div>
+            <div class="col-md-6">
+              <%= f.password_field :password_confirmation, placeholder: "Password confirmation", class: "form-control form-spacer" %>
+            </div>
+            <div class="col-md-6">
+              <%= f.email_field :email, placeholder: "Email", class: "form-control form-spacer" %>
+            </div>
+            <div class="col-md-6">
+              <%= f.submit "Save &raquo;".html_safe, class: "btn btn-warning btn-block", value: "enforce" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

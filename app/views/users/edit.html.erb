@@ -1,0 +1,18 @@
+<h1>Edit User <%= @user .email %> <%= link_to "Back &crarr;".html_safe, users_path, class: "btn btn-primary" %></h1>
+
+<%= form_for @user do |f| %>
+  <div class="row">
+    <div class="col-md-6">
+      <%= f.email_field :email, placeholder: "Email", class: "form-control form-spacer" %>
+    </div>
+    <div class="col-md-6">
+      <%= f.password_field :password, placeholder: "Password", class: "form-control form-spacer" %>
+    </div>
+    <div class="col-md-6">
+      <%= f.password_field :password_confirmation, placeholder: "Password confirmation", class: "form-control form-spacer" %>
+    </div>
+    <div class="col-md-6">
+      <%= f.submit "Save", class: "btn btn-primary btn-block" %>
+    </div>
+  </div>
+<% end %>

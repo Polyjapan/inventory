@@ -1,0 +1,27 @@
+<h2>User management <%= link_to "Manually create user &raquo;".html_safe, new_user_path, class: "btn btn-primary" %></h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th style="width:5%;">#</th>
+      <th style="width:50%;">Email</th>
+      <th style="width:15%;">Creation</th>
+      <th style="width:15%;">Last access</th>
+      <th style="width:15%;">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |u| %>
+      <tr>
+        <td><%= u.id %></td>
+        <td><%= u.email %></td>
+        <td><%= u.created_at %></td>
+        <td><%= u.last_sign_in_at %></td>
+        <td>
+          <%= link_to "Edit &raquo;".html_safe, edit_user_path(:id => u.id) %> /
+          <%= link_to "Destroy &raquo;".html_safe, user_path(:id => u.id), :method => "delete", data: { confirm: 'Delete ?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

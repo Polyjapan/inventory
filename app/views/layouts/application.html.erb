@@ -19,13 +19,10 @@
           <li class="sidebar-brand">
             <%= link_to "DEV", root_path %>
           </li>
-          <li><%= link_to "Inventory", inventory_path %></li>
-          <li><%= link_to "Items", items_path %></li>
-          <li><%= link_to "Locations", locations_path %></li>
+          <%= render 'layouts/navigation-top' %>
         </ul>
         <ul class="sidebar-nav bottom">
-          <li><%= link_to "My account", "" %></li>
-          <li><%= link_to "Logout", logout_path %></li>
+          <%= render 'layouts/navigation-bottom' %>
         </ul>
       </div>
       <!-- /#sidebar-wrapper -->
@@ -37,11 +34,8 @@
               <!-- nav-top, if width < 768px -->
               <div id="navigation-top">
                 <ol class="breadcrumb">
-                  <li><%= link_to "Inventory", inventory_path %></li>
-                  <li><%= link_to "Items", items_path %></li>
-                  <li><%= link_to "Locations", locations_path %></li>
-                  <li><%= link_to "My account", "" %></li>
-                  <li><%= link_to "Logout", logout_path %></li>
+                  <%= render 'layouts/navigation-top' %>
+                  <%= render 'layouts/navigation-bottom' %>
                 </ol>
               </div>
               <!-- /nav-top -->
