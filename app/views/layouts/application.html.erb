@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Inventory</title>
+  <title><%= Rails.configuration.application_title %> - Inventory</title>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1">
@@ -17,7 +17,7 @@
       <div id="sidebar-wrapper">
         <ul class="sidebar-nav top">
           <li class="sidebar-brand">
-            <%= link_to "DEV", root_path %>
+            <%= link_to Rails.configuration.application_title, root_path %>
           </li>
           <%= render 'layouts/navigation-top' %>
         </ul>
