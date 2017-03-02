@@ -25,7 +25,7 @@
           <% end %>
         </td>
         <td><%= l.quantity %></td>
-        <td><%= link_to "Edit", "/inventory/#{l.id}/edit" %></td>
+        <td><%= link_to "Edit", "#{Rails.configuration.relative_url_root}/inventory/#{l.id}/edit" %></td>
       </tr>
     <% end %>
   </tbody>

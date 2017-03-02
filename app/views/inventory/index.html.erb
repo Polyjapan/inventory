@@ -57,7 +57,7 @@
         </td>
         <td><%= i.quantity %></td>
         <td>
-          <%= link_to "Edit", "/inventory/#{i.id}/edit" %> /
+          <%= link_to "Edit", "#{Rails.configuration.relative_url_root}/inventory/#{i.id}/edit" %> /
           <%= link_to "Delete", inventory_path(:id => i.id), method: :delete, data: { confirm: 'Delete ?' } %>
         </td>
       </tr>

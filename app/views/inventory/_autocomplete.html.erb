@@ -20,7 +20,7 @@ function fail(id, group) {
   group.addClass('has-warning');
 }
 
-$.get('/items.json', function(data){
+$.get('<%= Rails.configuration.relative_url_root %>/items.json', function(data){
   $item.typeahead({ source:data });
 },'json');
 $item.change(function() {
@@ -40,7 +40,7 @@ $item.change(function() {
   }
 });
 
-$.get('/locations.json', function(data){
+$.get('<%= Rails.configuration.relative_url_root %>/locations.json', function(data){
   $loc.typeahead({ source:data });
 },'json');
 $loc.change(function() {
@@ -61,11 +61,11 @@ $loc.change(function() {
 });
 
 // Requesting json sources twice !
-$.get('/items.json', function(data){
+$.get('<%= Rails.configuration.relative_url_root %>/items.json', function(data){
   $("#item_name_search").typeahead({ source:data });
 },'json');
 
-$.get('/locations.json', function(data){
+$.get('<%= Rails.configuration.relative_url_root %>/locations.json', function(data){
   $("#location_name_search").typeahead({ source:data });
 },'json');
 </script>
