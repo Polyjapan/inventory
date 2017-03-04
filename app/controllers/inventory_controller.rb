@@ -3,7 +3,7 @@ before_action :authenticate_user!
 
   def index
     @q = Line.ransack(params[:q])
-    @lines = @q.result.includes(:item, :location)
+    @lines = @q.result.includes(:item, :location).order("items.name ASC")
     @categories = Category.all
   end
 
