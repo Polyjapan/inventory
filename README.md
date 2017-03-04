@@ -1,24 +1,34 @@
-# README
+# Inventory
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a simple inventory management webapp originally designed for
+[PolyJapan](https://polyjapan.epfl.ch/). It was build using
+[Ruby on Rails](http://rubyonrails.org/).
 
-Things you may want to cover:
+## Deployment (Dev)
 
-* Ruby version
+You obviously need ruby (and rubygem). You may want to take a look
+to [rubyinstall.org](http://rubyinstaller.org/) or
+[railsinstaller.org](http://rubyinstaller.org/) if you're running on windows.
 
-* System dependencies
+```
+# First clone this repo
+git clone git@gitlab.gnugen.ch:floure/inventory.git
+cd inventory
 
-* Configuration
+# Install dependencies
+bundle install --path vendor/bundle
 
-* Database creation
+# Create database (default: use sqlite3)
+rake db:create
 
-* Database initialization
+# Run migrations
+rake db:migrate
 
-* How to run the test suite
+# Create default user
+rake db:seed
 
-* Services (job queues, cache servers, search engines, etc.)
+# Run!
+rails server
 
-* Deployment instructions
-
-* ...
+# The app should now be available on 127.0.0.1:3000.
+```
