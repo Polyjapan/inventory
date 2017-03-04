@@ -43,6 +43,16 @@
       <%= form_for Category.new do |f| %>
         <div class="modal-body">
           <%= f.text_field :name, placeholder: "Name", class: "form-control form-spacer" %>
+          <% @colors.each_slice(5).to_a.each do |colors| %>
+            <ol class="breadcrumb">
+              <% colors.each do |c| %>
+                <li>
+                  <%= f.radio_button(:color, c) %>
+                  <span class="label label-<%= c %>" style="position:relative;top:-4px;">Category</span>
+                </li>
+              <% end %>
+            </ol>
+          <% end %>
           <%= f.text_area :description, placeholder: "Description", class: "form-control form-spacer" %>
         </div>
         <div class="modal-footer">

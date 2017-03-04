@@ -1,10 +1,26 @@
 <%= form_for @category do |f| %>
-  <h1>Edit category : <%= @category.name %> <%= f.submit "Save changes &raquo;".html_safe, class: "btn btn-primary" %></h1>
+  <h1>
+    Edit category : <%= @category.name %>
+  <%= link_to "Back &crarr;".html_safe, categories_path, class: "btn btn-default" %>
+  <%= f.submit "Save changes &raquo;".html_safe, class: "btn btn-primary" %>
+</h1>
 
-  <div class="row">
+<div class="row">
     <div class="col-md-12">
-       <%= f.text_field :name, placeholder: "Name", class: "form-control form-spacer" %>
-       <%= f.text_area :description, placeholder: "Description", class: "form-control" %>
+      <%= f.text_field :name, placeholder: "Name", class: "form-control form-spacer" %>
+    </div>
+    <div class="col-md-12">
+      <ol class="breadcrumb">
+        <% @colors.each do |c| %>
+          <li>
+            <%= f.radio_button(:color, c) %>
+            <span class="label label-<%= c %>" style="position:relative;top:-4px;">Category</span>
+          </li>
+        <% end %>
+      </ol>
+    </div>
+    <div class="col-md-12">
+      <%= f.text_area :description, placeholder: "Description", class: "form-control" %>
     </div>
   </div>
 <% end %>

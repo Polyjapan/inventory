@@ -1,8 +1,10 @@
 class CategoriesController < ApplicationController
-before_action :authenticate_user!
+  @@colors = ['default', 'primary', 'success', 'info', 'warning', 'danger']
+  before_action :authenticate_user!
 
   def index
     @categories = Category.order(name: :asc).all
+    @colors = @@colors
   end
 
   def show
@@ -22,6 +24,7 @@ before_action :authenticate_user!
 
   def edit
     @category = Category.find(params[:id])
+    @colors = @@colors
   end
 
   def update
@@ -51,6 +54,6 @@ before_action :authenticate_user!
   private
 
   def category_params
-    params.require(:category).permit(:name, :description)
+    params.require(:category).permit(:name, :description, :color)
   end
 end

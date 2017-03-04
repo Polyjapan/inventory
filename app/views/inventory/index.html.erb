@@ -52,7 +52,7 @@
         <td>
           <%= i.item.name %>
           <% i.categories.each do |c| %>
-            <span class="label label-info"><%= c.name %></span>
+            <span class="label label-<%= c.color %>"><%= c.name %></span>
           <% end %>
         </td>
         <td><%= i.note %></td>
