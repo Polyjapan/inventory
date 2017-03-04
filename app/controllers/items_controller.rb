@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @items = Item.all
+    @items = Item.order(name: :asc).all
     respond_to do |format|
       format.html
       format.json { render :json => @items.to_json }
