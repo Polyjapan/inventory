@@ -26,7 +26,17 @@ class UsersController < ApplicationController
       flash[:error] = "Something went wrong."
     end
 
-    RegistrationMailer.welcome(@user, generated_password).deliver if params[:submit] == "generate"
+    RegistrationMailer.welcome(@user, generated_password).deliver if params[:commit] == "generate"
+    redirect_to users_path
+  end
+
+  def update
+    @user = User.find(params[:id])
+    if @user.update(user_params)
+      flash[:success] = "Successfuly saved."
+    else
+      flash[:error] = "Something went wrong : " + @user.errors.full_messages.to_sentence
+    end
     redirect_to users_path
   end
 

@@ -1,5 +1,5 @@
 <%= form_for @line, url: {action: "update"} do |f| %>
-  <h1>Edit inventory entry <%= f.submit "Save changes &raquo;".html_safe, class: "btn btn-primary" %></h1>
+  <h1>Edit inventory entry <%= link_to "Back &crarr;".html_safe, inventory_path, class: "btn btn-default" %> <%= f.submit "Save changes &raquo;".html_safe, class: "btn btn-primary" %></h1>
 
   <div class="row">
     <div class="col-md-6">
@@ -14,7 +14,10 @@
         <%= text_field_tag "loc", @line.location.name,  id: "loc-field", class: "form-control", placeholder: "Location", data_provide: "typehead", autocomplete: "off" %>
         <%= f.hidden_field :location_id, id: "loc-field-id" %>
       </div>
-        <%= f.datetime_field :expire_on, placeholder: "Expiration (Optional)", class: "form-control form-spacer datepicker" %>
+      <%= f.datetime_field :expire_on, placeholder: "Expiration (Optional)", class: "form-control form-spacer datepicker" %>
+    </div>
+    <div class="col-md-12">
+      <%= f.collection_select(:category_ids, @categories, :id, :name, {:include_blank => 'Category (Optional)'}, {:class => 'form-control form-spacer'}) %>
     </div>
     <div class="col-md-12">
       <%= f.text_area :note, placeholder: "Note", class: "form-control" %>

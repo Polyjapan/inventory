@@ -4,10 +4,12 @@ before_action :authenticate_user!
   def index
     @q = Line.ransack(params[:q])
     @lines = @q.result.includes(:item, :location)
+    @categories = Category.all
   end
 
   def edit
     @line = Line.find(params[:id])
+    @categories = Category.all
   end
 
   def create
@@ -46,7 +48,7 @@ before_action :authenticate_user!
   private
 
   def line_params
-    params.require(:line).permit(:note, :item_id, :location_id, :quantity, :expire_on)
+    params.require(:line).permit(:note, :item_id, :location_id, :quantity, :expire_on, :category_ids)
   end
 
   def check_links(p)

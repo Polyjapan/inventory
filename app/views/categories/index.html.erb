@@ -1,0 +1,55 @@
+<h1>
+  Categories
+  <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addCategoryModal">
+     New category &raquo;
+  </button>
+  <%= link_to "Back to inventory &crarr;".html_safe, inventory_path, class: "btn btn-default btn-sm" %>
+</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th style="width:5%;">#</th>
+      <th style="width:25%;">Name</th>
+      <th style="width:55;%">Description</th>
+      <th style="width:5%;">Lines</th>
+      <th style="width:10%;">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @categories.each do |c| %>
+      <tr>
+       <td><%= c.id %></td>
+       <td><%= c.name %></td>
+       <td><%= c.description %></td>
+       <td><%= link_to "Lines &raquo;".html_safe, category_path(:id => c.id) %></td>
+       <td>
+         <%= link_to "Edit", edit_category_path(:id => c.id) %> /
+         <%= link_to "Delete", category_path(:id => c.id), method: :delete, data: { confirm: 'Delete ?' } %>
+       </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<!-- Add item modal -->
+<div class="modal fade" id="addCategoryModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Add a category</h4>
+      </div>
+      <%= form_for Category.new do |f| %>
+        <div class="modal-body">
+          <%= f.text_field :name, placeholder: "Name", class: "form-control form-spacer" %>
+          <%= f.text_area :description, placeholder: "Description", class: "form-control form-spacer" %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <%= f.submit "Save Category", class: "btn btn-primary" %>
+        </div>
+      <%end %>
+    </div>
+  </div>
+</div>

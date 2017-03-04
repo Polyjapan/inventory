@@ -1,0 +1,10 @@
+<%= form_for @category do |f| %>
+  <h1>Edit category : <%= @category.name %> <%= f.submit "Save changes &raquo;".html_safe, class: "btn btn-primary" %></h1>
+
+  <div class="row">
+    <div class="col-md-12">
+       <%= f.text_field :name, placeholder: "Name", class: "form-control form-spacer" %>
+       <%= f.text_area :description, placeholder: "Description", class: "form-control" %>
+    </div>
+  </div>
+<% end %>

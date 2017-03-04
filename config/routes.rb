@@ -23,6 +23,8 @@ Rails.application.routes.draw do
   match '/inventory/:id/edit', :to => "inventory#edit", via: :get
   match '/inventory/:id', :to => "inventory#update", via: :patch
 
+  resources :categories, :only => [:index, :create, :update, :destroy, :edit, :show]
+
   # Items
   #match '/items', :to => "items#index", via: :get
   resources :items, :only => [:index, :create, :update, :destroy, :edit, :show]
