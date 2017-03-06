@@ -2,7 +2,9 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @items = Item.order(name: :asc).all
+    @q = Item.ransack(params[:q])
+    @items = @q.result.order(name: :asc)
+
     respond_to do |format|
       format.html
       format.json { render :json => @items.to_json }

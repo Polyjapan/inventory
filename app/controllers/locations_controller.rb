@@ -2,7 +2,9 @@ class LocationsController < ApplicationController
   before_filter :authenticate_user!
 
   def index
-    @locations = Location.order(name: :asc).all
+    @q = Location.ransack(params[:q])
+    @locations = @q.result.order(name: :asc)
+
     respond_to do |format|
       format.html
       format.json { render :json => @locations.to_json }
