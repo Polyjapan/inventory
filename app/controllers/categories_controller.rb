@@ -9,7 +9,7 @@ class CategoriesController < ApplicationController
 
   def show
     @category = Category.find(params[:id])
-    @lines = @category.lines
+    @items = @category.items
   end
 
   def create
@@ -39,8 +39,8 @@ class CategoriesController < ApplicationController
 
   def destroy
     @category = Category.find(params[:id])
-    if @category.lines.count != 0
-      flash[:error] = "Cannot delete category : used in inventory."
+    if @category.items.count != 0
+      flash[:error] = "Cannot delete category : used in items."
     else
       if @category.destroy
         flash[:notice] = "Deleted!"

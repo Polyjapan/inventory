@@ -3,6 +3,7 @@
   <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addItemModal">
     Add Item &raquo;
   </button>
+  <%= link_to "Categories", categories_path, class: "btn btn-default btn-sm" %>
 </h1>
 
 <%= search_form_for @q, url: items_path do |f| %>
@@ -29,11 +30,16 @@
   <tbody>
     <% @items.each do |i| %>
       <tr>
-       <td><%= i.id %></td>
-       <td><%= i.name %></td>
-       <td><%= i.description %></td>
-       <td><%= link_to "Stock &raquo;".html_safe, item_path(:id => i.id) %></td>
-       <td>
+        <td><%= i.id %></td>
+        <td>
+          <%= i.name %>
+          <% i.categories.each do |c| %>
+            <span class="label label-<%= c.color %>"><%= c.name %></span>
+          <% end %>
+        </td>
+        <td><%= i.description %></td>
+        <td><%= link_to "Stock &raquo;".html_safe, item_path(:id => i.id) %></td>
+        <td>
          <%= link_to "Edit", edit_item_path(:id => i.id) %> /
          <%= link_to "Delete", item_path(:id => i.id), method: :delete, data: { confirm: 'Delete ?' } %>
        </td>
@@ -53,6 +59,7 @@
       <%= form_for Item.new do |f| %>
         <div class="modal-body">
           <%= f.text_field :name, placeholder: "Name", class: "form-control form-spacer" %>
+          <%= f.collection_select(:category_ids, @categories, :id, :name, {:include_blank => 'Category (Optional)'}, {:class => 'form-control form-spacer'}) %>
           <%= f.text_area :description, placeholder: "Description", class: "form-control form-spacer" %>
         </div>
         <div class="modal-footer">

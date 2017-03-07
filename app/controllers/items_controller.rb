@@ -4,6 +4,7 @@ class ItemsController < ApplicationController
   def index
     @q = Item.ransack(params[:q])
     @items = @q.result.order(name: :asc)
+    @categories = Category.all
 
     respond_to do |format|
       format.html
@@ -13,6 +14,7 @@ class ItemsController < ApplicationController
 
   def edit
     @item = Item.find(params[:id])
+    @categories = Category.all
   end
 
   def show
@@ -57,6 +59,6 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:name, :description, :expire_on)
+    params.require(:item).permit(:name, :description, :expire_on, :category_ids)
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170304092129) do
+ActiveRecord::Schema.define(version: 20170307162806) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -21,11 +21,11 @@ ActiveRecord::Schema.define(version: 20170304092129) do
     t.string   "color"
   end
 
-  create_table "categories_lines", id: false, force: :cascade do |t|
+  create_table "categories_items", id: false, force: :cascade do |t|
     t.integer "category_id"
-    t.integer "line_id"
-    t.index ["category_id"], name: "index_categories_lines_on_category_id"
-    t.index ["line_id"], name: "index_categories_lines_on_line_id"
+    t.integer "item_id"
+    t.index ["category_id"], name: "index_categories_items_on_category_id"
+    t.index ["item_id"], name: "index_categories_items_on_item_id"
   end
 
   create_table "items", force: :cascade do |t|

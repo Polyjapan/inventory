@@ -17,9 +17,6 @@
       <%= f.datetime_field :expire_on, placeholder: "Expiration (Optional)", class: "form-control form-spacer datepicker" %>
     </div>
     <div class="col-md-12">
-      <%= f.collection_select(:category_ids, @categories, :id, :name, {:include_blank => 'Category (Optional)'}, {:class => 'form-control form-spacer'}) %>
-    </div>
-    <div class="col-md-12">
       <%= f.text_area :note, placeholder: "Note", class: "form-control" %>
     </div>
   </div>

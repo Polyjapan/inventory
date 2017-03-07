@@ -38,3 +38,10 @@
 .text-right {
   text-align:right;
 }
+.nostyle-link {
+  text-decoration: none !important;
+  color: #333333;
+}
+.nostyle-link:hover {
+  color: #333333;
+}

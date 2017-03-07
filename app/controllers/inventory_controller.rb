@@ -4,12 +4,10 @@ class InventoryController < ApplicationController
   def index
     @q = Line.ransack(params[:q])
     @lines = @q.result.includes(:item, :location).order("items.name ASC")
-    @categories = Category.all
   end
 
   def edit
     @line = Line.find(params[:id])
-    @categories = Category.all
   end
 
   def create
@@ -48,7 +46,7 @@ class InventoryController < ApplicationController
   private
 
   def line_params
-    params.require(:line).permit(:note, :item_id, :location_id, :quantity, :expire_on, :category_ids)
+    params.require(:line).permit(:note, :item_id, :location_id, :quantity, :expire_on)
   end
 
   def check_links(p)

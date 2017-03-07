@@ -1,40 +1,28 @@
-<h1>Stock : <%= @category.name %> <%= link_to "Back &crarr;".html_safe, items_path, class: "btn btn-primary" %></h1>
+<h1>Stock : <%= @category.name %> <%= link_to "Back &crarr;".html_safe, categories_path, class: "btn btn-primary" %></h1>
 
 <table class="table">
   <thead>
     <tr>
       <th style="width:5%;">#</th>
-      <th style="width:20%;">Item</th>
-      <th style="width:35%;">Note</th>
-      <th style="width:10%;">Location</th>
-      <th style="width:5%;">Expiration</th>
-      <th style="width:10%;">Quantity</th>
+      <th style="width:40%;">Item</th>
+      <th style="width:40%;">Description</th>
       <th style="Width:15%;">Actions</th>
     </tr>
   </thead>
   <tbody>
-    <% @lines.each do |l| %>
+    <% @items.each do |i| %>
       <tr>
-        <td><%= l.id %></td>
+        <td><%= i.id %></td>
         <td>
-          <%= l.item.name %>
-          <% l.categories.each do |c| %>
+          <%= i.name %>
+          <% i.categories.each do |c| %>
             <span class="label label-info"><%= c.name %></span>
           <% end %>
         </td>
-        <td><%= l.note %></td>
-        <td><%= l.location.name %></td>
+        <td><%= i.description %></td>
         <td>
-          <% if !l.expire_on.nil? %>
-            <span class="label label-default">
-              <%= l.expire_on.strftime("Expire on %d-%m-%y") %>
-            </span>
-          <% end %>
-        </td>
-        <td><%= l.quantity %></td>
-        <td>
-          <%= link_to "Edit", "#{Rails.configuration.relative_url_root}/inventory/#{l.id}/edit" %> /
-          <%= link_to "Delete", inventory_path(:id => l.id), method: :delete, data: { confirm: 'Delete ?' } %>
+          <%= link_to "Edit", edit_item_path(:id => i.id) %> /
+          <%= link_to "Delete", item_path(:id => i.id), method: :delete, data: { confirm: 'Delete ?' } %>
         </td>
       </tr>
     <% end %>

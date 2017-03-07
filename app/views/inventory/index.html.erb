@@ -3,7 +3,6 @@
   <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#newEntryModal">
     New Entry &raquo;
   </button>
-  <%= link_to "Categories", categories_path, class: "btn btn-default btn-sm" %>
   <button class="btn btn-default btn-sm" id="menu-toggle" type="button">
     Toggle Sidebar
   </button>
@@ -50,13 +49,15 @@
       <tr>
         <td><%= i.id %></td>
         <td>
-          <%= i.item.name %>
-          <% i.categories.each do |c| %>
+          <a href="#" class="nostyle-link" data-toggle="tooltip" data-placement="left" title="<%= i.item.description %>"><%= i.item.name %></a>
+          <% i.item.categories.each do |c| %>
             <span class="label label-<%= c.color %>"><%= c.name %></span>
           <% end %>
         </td>
         <td><%= i.note %></td>
-        <td><%= i.location.name %></td>
+        <td>
+          <a href="#" class="nostyle-link" data-toggle="tooltip" data-placement="left" title="<%= i.location.description %>"><%= i.location.name %></a>
+        </td>
         <td>
           <% if !i.expire_on.nil? %>
             <span class="label label-default">
@@ -92,7 +93,6 @@
             <%= text_field_tag "loc", "",  name: "location_name", id: "loc-field", class: "form-control", placeholder: "Location", data_provide: "typehead", autocomplete: "off" %>
             <%= f.hidden_field :location_id, value: 0, id: "loc-field-id" %>
           </div>
-          <%= f.collection_select(:category_ids, @categories, :id, :name, {:include_blank => 'Category (Optional)'}, {:class => 'form-control form-spacer'}) %>
           <%= f.text_field :expire_on, placeholder: "Expiration (Optional)", class: "form-control form-spacer datepicker" %>
           <%= f.text_field :quantity, placeholder: "Quantity", class: "form-control form-spacer" %>
           <%= f.text_area :note, placeholder: "Note", class: "form-control" %>
@@ -117,4 +117,9 @@ $('.datepicker').datepicker({
     e.preventDefault();
     $("#wrapper").toggleClass("toggled");
   });
+</script>
+<script>
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  })
 </script>
