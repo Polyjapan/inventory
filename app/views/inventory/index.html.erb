@@ -12,7 +12,7 @@
 </h1>
 
 <%= search_form_for @q, url: inventory_path do |f| %>
-  <div class="row">
+   <div class="row">
     <div class="col-md-5">
       <%= f.search_field :item_name_cont, class: "form-control", placeholder: "Item name contains", id: "item_name_search", autocomplete: "off" %>
     </div>
@@ -27,7 +27,20 @@
   <br />
   <div class="collapse" id="advancedSearch">
     <div class="well">
-      <span class="label label-default">Not yet implemented.</span>
+      <div class="row">
+        <div class="col-md-6">
+          <%= f.search_field :expire_on_lteq, class: "form-control datepicker form-spacer", placeholder: "Expire before", autocomplete: "off" %>
+          </div>
+          <div class="col-md-6">
+          <%= f.search_field :expire_on_gteq, class: "form-control datepicker form-spacer", placeholder: "Expire after", autocomplete: "off" %>
+        </div>
+        <div class="col-md-6">
+          <%= f.search_field :note_cont, class: "form-control form-spacer", placeholder: "Note contains", autocomplete: "off" %>
+        </div>
+        <div class="col-md-6">
+          <%= f.collection_select(:item_categories_id_eq, Category.order(:name), :id, :name, {include_blank: "Category is :"}, {class: "form-control"}) %>
+        </div>
+      </div>
     </div>
   </div>
 <% end %>
