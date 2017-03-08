@@ -1,0 +1,4 @@
+ID,Item,Note,Location,Quantity,Expiration
+<%- @lines.each do |l| -%>
+<%= l.id %>,<%= l.item.name %>,<%= l.note %>,<%= l.location.name %>,<%= l.quantity %>,<%= l.expire_on %>
+<%- end -%>

@@ -6,6 +6,7 @@
   <button class="btn btn-default btn-sm" id="menu-toggle" type="button">
     Toggle Sidebar
   </button>
+  <%= link_to "Export as CSV", inventory_path(:format => :csv), class: "btn btn-sm btn-default" %>
   <button class="btn btn-default btn-sm" type="button" data-toggle="collapse" data-target="#advancedSearch" aria-expanded="false" aria-controls="advancedSearch">
     Advanced Search
   </button>

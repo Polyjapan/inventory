@@ -4,6 +4,15 @@ class InventoryController < ApplicationController
   def index
     @q = Line.ransack(params[:q])
     @lines = @q.result.includes(:item, :location).order("items.name ASC")
+
+    respond_to do |format|
+      format.html
+      format.csv do
+        headers['Content-Disposition'] = 
+          "attachment; filename=\"polyjapan-inventory-#{Time.now.to_i}.csv\""
+        headers['Content-Type'] ||= 'text/csv'
+      end
+    end
   end
 
   def edit
