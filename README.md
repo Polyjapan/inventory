@@ -1,6 +1,6 @@
 # Inventory
 
-This is a simple inventory management webapp originally designed for
+Simple inventory management webapp originally designed for
 [PolyJapan](https://polyjapan.epfl.ch/). It was build using
 [Ruby on Rails](http://rubyonrails.org/).
 
@@ -12,13 +12,13 @@ to [rubyinstall.org](http://rubyinstaller.org/) or
 
 ```
 # First clone this repo
-git clone git@gitlab.gnugen.ch:floure/inventory.git
+git clone git@github.com:Polyjapan/inventory.git
 cd inventory
 
 # Install dependencies
 bundle install --path vendor/bundle
 
-# Create database (default: use sqlite3)
+# Create database (use sqlite3 by default)
 rake db:create
 
 # Run migrations
